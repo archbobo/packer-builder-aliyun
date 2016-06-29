@@ -52,13 +52,14 @@ func (s *stepCreateInstance) Cleanup(state multistep.StateBag) {
 	client := state.Get("client").(*ecs.Client)
 	ui := state.Get("ui").(packer.Ui)
 
-	// Destroy the instance we just created
-	ui.Say("Destory instance...")
+	// Delete the instance we just created
+	ui.Say("Delete instance...")
 	err := client.DeleteInstance(s.instanceId)
 	if err != nil {
 		ui.Error(fmt.Sprintf(
-			"Error destroying instance. Please destroy it manually: %s", err))
+			"Error deleting instance. Please delete it manually: %s", err))
+	} else {
+		ui.Message("Instance has been deleted!")
 	}
 
-	ui.Message("Instance has been deleted!")
 }

@@ -52,12 +52,13 @@ func (s *stepStartInstance) Cleanup(state multistep.StateBag) {
 	if err != nil {
 		ui.Error(fmt.Sprintf(
 			"Error stopping instance: %s", err))
+	} else {
+		err = waitForInstanceStatus(ecs.Stopped, instanceId, c.RegionId, client, c.StatusTimeout)
+		if err != nil {
+			ui.Error(fmt.Sprintf("Error waiting for instance to become stopped: %s", err))
+		} else {
+			ui.Message("Instance has been stopped!")
+		}
 	}
 
-	err = waitForInstanceStatus(ecs.Stopped, instanceId, c.RegionId, client, c.StatusTimeout)
-	if err != nil {
-		ui.Error(fmt.Sprintf("Error waiting for instance to become stopped: %s", err))
-	}
-
-	ui.Message("Instance has been stopped!")
 }

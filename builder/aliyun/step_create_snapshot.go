@@ -72,6 +72,7 @@ func (s *stepCreateSnapshot) Cleanup(state multistep.StateBag) {
 	if err != nil {
 		ui.Error(fmt.Sprintf(
 			"Error deleting snapshot: %s, please delete it manually", err))
+	} else {
+		ui.Message("Snapshot has been deleted!")
 	}
-	ui.Message("Snapshot has been deleted!")
 }
