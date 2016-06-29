@@ -8,6 +8,7 @@ import (
 	"github.com/denverdino/aliyungo/common"
 )
 
+// Artifact represents an Aliyun image as the result of a Packer build.
 type Artifact struct {
 	// The name of the image
 	imageName string

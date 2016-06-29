@@ -40,6 +40,8 @@ func (s *stepCreateImage) Run(state multistep.StateBag) multistep.StepAction {
 		return multistep.ActionHalt
 	}
 
+	ui.Message("Image has been created!")
+
 	s.imageId = imageId
 
 	// Store the image id for later
@@ -48,25 +50,5 @@ func (s *stepCreateImage) Run(state multistep.StateBag) multistep.StepAction {
 	return multistep.ActionContinue
 }
 
-func (s *stepCreateImage) Cleanup(state multistep.StateBag) {
-
-	// no cleanup
-
-	// if the image isn't there, we probably never created it
-	//if s.imageId == "" {
-	//	return
-	//}
-	//
-	//c := state.Get("config").(Config)
-	//client := state.Get("client").(*ecs.Client)
-	//ui := state.Get("ui").(packer.Ui)
-	//
-	//// Delete the image we just created
-	//ui.Say("Delete image...")
-	//err := client.DeleteImage(c.RegionId, s.imageId)
-	//if err != nil {
-	//	ui.Error(fmt.Sprintf(
-	//		"Error deleting image: %s, please delete it manually", err))
-	//}
-}
+func (s *stepCreateImage) Cleanup(state multistep.StateBag) {}
 

@@ -36,6 +36,7 @@ func (s *stepCreateInstance) Run(state multistep.StateBag) multistep.StepAction 
 	// We use this in cleanup
 	s.instanceId = instanceId
 
+	ui.Message("Instance has been created!")
 	// Store the instance id for later
 	state.Put("instance_id", instanceId)
 
@@ -58,4 +59,6 @@ func (s *stepCreateInstance) Cleanup(state multistep.StateBag) {
 		ui.Error(fmt.Sprintf(
 			"Error destroying instance. Please destroy it manually: %s", err))
 	}
+
+	ui.Message("Instance has been deleted!")
 }

@@ -47,8 +47,11 @@ func (s *stepInstanceInfo) Run(state multistep.StateBag) multistep.StepAction {
 		return multistep.ActionHalt
 	}
 
+	publicIp := instances[0].PublicIpAddress.IpAddress[0]
+
+	ui.Message(fmt.Sprintf("Public IP : %s", publicIp))
 	// for ssh later
-	state.Put("public_ip", instances[0].PublicIpAddress.IpAddress[0])
+	state.Put("public_ip", publicIp)
 
 	// Get disk information
 	ui.Say("Getting disk info...")

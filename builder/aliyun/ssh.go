@@ -20,7 +20,6 @@ func sshConfig(state multistep.StateBag) (*gossh.ClientConfig, error) {
 			ssh.PasswordKeyboardInteractive(config.Comm.SSHPassword)),
 	}
 
-
 	return &gossh.ClientConfig{
 		User: config.Comm.SSHUsername,
 		Auth: auth,

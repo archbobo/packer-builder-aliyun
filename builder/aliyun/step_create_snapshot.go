@@ -50,6 +50,7 @@ func (s *stepCreateSnapshot) Run(state multistep.StateBag) multistep.StepAction 
 
 	s.snapshotId = snapshotId
 
+	ui.Message("Snapshot has been created!")
 	// Store the snapshot id for later
 	state.Put("snapshot_id", snapshotId)
 
@@ -72,4 +73,5 @@ func (s *stepCreateSnapshot) Cleanup(state multistep.StateBag) {
 		ui.Error(fmt.Sprintf(
 			"Error deleting snapshot: %s, please delete it manually", err))
 	}
+	ui.Message("Snapshot has been deleted!")
 }

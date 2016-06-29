@@ -34,6 +34,8 @@ func (s *stepStartInstance) Run(state multistep.StateBag) multistep.StepAction {
 		return multistep.ActionHalt
 	}
 
+	ui.Message("Instance has been started!")
+
 	return multistep.ActionContinue
 
 }
@@ -56,4 +58,6 @@ func (s *stepStartInstance) Cleanup(state multistep.StateBag) {
 	if err != nil {
 		ui.Error(fmt.Sprintf("Error waiting for instance to become stopped: %s", err))
 	}
+
+	ui.Message("Instance has been stopped!")
 }
