@@ -9,7 +9,6 @@ import (
 )
 
 type stepCreateImage struct {
-	imageId string
 }
 
 func (s *stepCreateImage) Run(state multistep.StateBag) multistep.StepAction {
@@ -41,8 +40,6 @@ func (s *stepCreateImage) Run(state multistep.StateBag) multistep.StepAction {
 	}
 
 	ui.Message("Image has been created!")
-
-	s.imageId = imageId
 
 	// Store the image id for later
 	state.Put("image_id", imageId)
