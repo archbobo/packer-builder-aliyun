@@ -23,9 +23,10 @@ func waitForSnapshotAccomplished(snapshotId string, regionId common.Region,
 			attempts += 1
 
 			log.Printf("Checking snapshot progress... (attempt: %d)", attempts)
+			snapshotIds := []string{snapshotId}
 			snapshots, _, err := client.DescribeSnapshots(&ecs.DescribeSnapshotsArgs{
 				RegionId: regionId,
-				SnapshotIds: {snapshotId},
+				SnapshotIds: snapshotIds,
 			})
 			if (err != nil) {
 				result <- err
@@ -86,9 +87,10 @@ func waitForInstanceStatus(desiredStatus ecs.InstanceStatus, instanceId string, 
 			attempts += 1
 
 			log.Printf("Checking instance status... (attempt: %d)", attempts)
+			instanceIds := fmt.Sprintf("[\"%s\"]", instanceId)
 			instances, _, err := client.DescribeInstances(&ecs.DescribeInstancesArgs{
 				RegionId: regionId,
-				InstanceIds: {instanceId},
+				InstanceIds: instanceIds,
 			})
 			if (err != nil) {
 				result <- err

@@ -17,9 +17,10 @@ func (s *stepInstanceInfo) Run(state multistep.StateBag) multistep.StepAction {
 
 	// Get instance information
 	ui.Say("Getting instance info...")
+	instanceIds := fmt.Sprintf("[\"%s\"]", instanceId)
 	instances, _, err := client.DescribeInstances(&ecs.DescribeInstancesArgs{
 		RegionId: c.RegionId,
-		InstanceIds: {instanceId},
+		InstanceIds: instanceIds,
 	})
 
 	if err != nil {
@@ -36,8 +37,7 @@ func (s *stepInstanceInfo) Run(state multistep.StateBag) multistep.StepAction {
 		return multistep.ActionHalt
 	}
 
-	invalid := instances[0].PublicIpAddress == nil ||
-	           instances[0].PublicIpAddress.IpAddress == nil ||
+	invalid := instances[0].PublicIpAddress.IpAddress == nil ||
 	           len(instances[0].PublicIpAddress.IpAddress) == 0 ||
 	           instances[0].PublicIpAddress.IpAddress[0] == ""
 	if invalid {

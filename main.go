@@ -1,8 +1,8 @@
-package packer_builder_aliyun
+package main
 
 import (
 	"github.com/mitchellh/packer/packer/plugin"
-	"github.com/archcentric/packer-builder-aliyun/builder/aliyun
+	"github.com/archcentric/packer-builder-aliyun/builder/aliyun"
 )
 
 func main() {
