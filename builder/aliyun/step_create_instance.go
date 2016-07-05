@@ -24,6 +24,7 @@ func (s *stepCreateInstance) Run(state multistep.StateBag) multistep.StepAction 
 		InstanceType: c.InstanceType,
 		SecurityGroupId: c.SecurityGroupId,
 		InstanceName: c.InstanceName,
+		Password: c.Comm.SSHPassword,
 	})
 
 	if err != nil {
@@ -39,6 +40,20 @@ func (s *stepCreateInstance) Run(state multistep.StateBag) multistep.StepAction 
 	ui.Message("Instance has been created!")
 	// Store the instance id for later
 	state.Put("instance_id", instanceId)
+
+	/*
+	ui.Say("Allocating public ip address...")
+	publicIpAddress, err := client.AllocatePublicIpAddress(instanceId)
+
+	if err != nil {
+		err := fmt.Errorf("Error allocating public ip address: %s", err)
+		state.Put("error", err)
+		ui.Error(err.Error())
+		return multistep.ActionHalt
+	}
+
+	ui.Message(fmt.Sprintf("Public IP allocated: %s", publicIpAddress))
+	*/
 
 	return multistep.ActionContinue
 }

@@ -37,21 +37,21 @@ func (s *stepInstanceInfo) Run(state multistep.StateBag) multistep.StepAction {
 		return multistep.ActionHalt
 	}
 
-	invalid := instances[0].PublicIpAddress.IpAddress == nil ||
-	           len(instances[0].PublicIpAddress.IpAddress) == 0 ||
-	           instances[0].PublicIpAddress.IpAddress[0] == ""
+	invalid := instances[0].InnerIpAddress.IpAddress == nil ||
+	           len(instances[0].InnerIpAddress.IpAddress) == 0 ||
+	           instances[0].InnerIpAddress.IpAddress[0] == ""
 	if invalid {
-		err := fmt.Errorf("public ip address not found for instance")
+		err := fmt.Errorf("inner ip address not found for instance")
 		state.Put("error", err)
 		ui.Error(err.Error())
 		return multistep.ActionHalt
 	}
 
-	publicIp := instances[0].PublicIpAddress.IpAddress[0]
+	innerIpAddress := instances[0].InnerIpAddress.IpAddress[0]
 
-	ui.Message(fmt.Sprintf("Public IP : %s", publicIp))
+	ui.Message(fmt.Sprintf("Inner IP : %s", innerIpAddress))
 	// for ssh later
-	state.Put("public_ip", publicIp)
+	state.Put("inner_ip", innerIpAddress)
 
 	// Get disk information
 	ui.Say("Getting disk info...")

@@ -7,7 +7,7 @@ import (
 )
 
 func commHost(state multistep.StateBag) (string, error) {
-	ipAddress := state.Get("public_ip").(string)
+	ipAddress := state.Get("inner_ip").(string)
 	return ipAddress, nil
 }
 
