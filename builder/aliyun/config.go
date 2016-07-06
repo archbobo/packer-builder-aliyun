@@ -18,6 +18,7 @@ import (
 )
 
 const defaultSshUsername = "root"
+const defaultSshPassword = "Packer@123"
 
 type Config struct {
 	common.PackerConfig `mapstructure:",squash"`
@@ -99,6 +100,10 @@ func NewConfig(raws ...interface{}) (*Config, []string, error) {
 		c.InstanceName = fmt.Sprintf("packer-aliyun-%s", uuid.TimeOrderedUUID())
 	}
 
+	if c.Comm.SSHPassword == "" {
+		c.Comm.SSHPassword = defaultSshPassword
+	}
+
 	if es := c.Comm.Prepare(&c.ctx); len(es) > 0 {
 		errs = packer.MultiErrorAppend(errs, es...)
 	}
@@ -112,10 +117,6 @@ func NewConfig(raws ...interface{}) (*Config, []string, error) {
 			errs, errors.New("access_key_secret for auth must be specified"))
 	}
 
-	if c.Comm.SSHPassword == "" {
-		errs = packer.MultiErrorAppend(
-			errs, errors.New("ssh_password is required"))
-	}
 
 	if c.RegionId == "" {
 		errs = packer.MultiErrorAppend(
