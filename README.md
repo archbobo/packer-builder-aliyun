@@ -15,6 +15,8 @@
 
 ## 安装
 
+TODO
+
 
 ## 基本的例子
 
@@ -75,7 +77,7 @@
 
 欢迎任何对Packer builder for Aliyun的意见、建议和贡献！
 
-如有疑问可以随时提问，你只需通过[Create an issue](https://github.com/archcentric/packer-builder-aliyun/issues)进行询问。
+如有疑问可以随时提问，你只需通过[Create an issue](https://github.com/archcentric/packer-builder-aliyun/issues/new)进行询问。
 
 ## TODO
 * 目前ssh仅通过阿里云内网IP访问来完成软件安装过程(provisioning)，也就是说运行packer的机器和目标ECS实例都要在阿里云内部才能访问到，后续考虑增加支持ssh通过阿里云公网IP访问的方式。
