@@ -15,8 +15,17 @@
 
 ## 安装
 
-TODO
-
+```bash
+$ cd $GOPATH
+$ mkdir -p mkdir -p src/github.com/archcentric
+$ git clone https://github.com/archcentric/packer-builder-aliyun.git
+$ (if exists) rm -rf src/github.com/mitchellh/packer/vendor/
+$ cd src/github.com/archcentric/packer-builder-aliyun
+$ go get
+$ go build
+$ mv packer-builder-aliyun ~/.packer.d/plugins/
+$ packer build examples/ubuntu.json
+```
 
 ## 基本的例子
 
