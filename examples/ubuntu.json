@@ -21,6 +21,7 @@
     "instance_type": "ecs.s2.large",
     "security_group_id": "{{user `ali_security_group_id`}}",
     "image_name": "packer-ubuntu-{{timestamp}}",
+    "internet_charge_type": "PayByTraffic",
     "image_description": "ubuntu image created by packer at {{timestamp}}",
     "ssh_password": "Packer@123"
   }]

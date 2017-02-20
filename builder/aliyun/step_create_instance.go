@@ -25,6 +25,7 @@ func (s *stepCreateInstance) Run(state multistep.StateBag) multistep.StepAction 
 		SecurityGroupId: c.SecurityGroupId,
 		InstanceName: c.InstanceName,
 		Password: c.Comm.SSHPassword,
+                InternetChargeType: c.InternetChargeType,
 	})
 
 	if err != nil {
