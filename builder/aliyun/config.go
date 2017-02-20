@@ -36,6 +36,7 @@ type Config struct {
 	ImageDescription string `mapstructure:"image_description"`
 	InstanceName string `mapstructure:"instance_name"`
 	StatusTimeout      time.Duration `mapstructure:"status_timeout"`
+        InternetChargeType aliyungo_common.InternetChargeType `mapstructure:"internet_charge_type"`
 
 	ctx interpolate.Context
 }
@@ -136,6 +137,11 @@ func NewConfig(raws ...interface{}) (*Config, []string, error) {
 	if c.SecurityGroupId == "" {
 		errs = packer.MultiErrorAppend(
 			errs, errors.New("security_group_id is required"))
+	}
+
+	if c.InternetChargeType == "" {
+		errs = packer.MultiErrorAppend(
+			errs, errors.New("internet_charge_type is required"))
 	}
 
 	log.Println(common.ScrubConfig(c, c.AccessKeyId, c.AccessKeySecret, c.Comm.SSHPassword))

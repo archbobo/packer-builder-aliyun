@@ -83,4 +83,5 @@ TODO
 * 目前ssh仅通过阿里云内网IP访问来完成软件安装过程(provisioning)，也就是说运行packer的机器和目标ECS实例都要在阿里云内部才能访问到，后续考虑增加支持ssh通过阿里云公网IP访问的方式。
 * 创建快照过程中的进度判断，目前仅判断progress完成度百分比，后续考虑增加状态status判断，需要完善第三方的[aliyun golang sdk](https://github.com/denverdino/aliyungo)。
 
-
+## 捐赠者
+- [Linkfluence](http://www.linkfluence.com)
